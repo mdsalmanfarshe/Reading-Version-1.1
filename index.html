@@ -1,0 +1,2217 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="theme-color" content="#0d233a">
+<title>ILMORA (ইলমোরা) — International-Grade Smart Education Ecosystem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4f7fb;
+  --panel: #ffffff;
+  --panel-2: #f8fafc;
+  --text: #0f172a;
+  --muted: #64748b;
+  --line: #e2e8f0;
+  --navy: #0d233a;
+  --navy-2: #16365c;
+  --emerald: #047857;
+  --emerald-soft: #d1fae5;
+  --teal: #0d9488;
+  --teal-hover: #0f766e;
+  --gold: #d9a441;
+  --gold-soft: #fef6e6;
+  --soft: #eaf1f8;
+  --green: #15803d;
+  --green-soft: #dcfce7;
+  --red: #b91c1c;
+  --red-dark: #991b1b;
+  --red-soft: #fee2e2;
+  --shadow: 0 4px 20px rgba(13, 35, 58, 0.07);
+  --shadow-lg: 0 12px 32px rgba(13, 35, 58, 0.14);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+[data-theme="dark"] {
+  --bg: #070e17;
+  --panel: #0f1a2a;
+  --panel-2: #142236;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --line: #22334d;
+  --navy: #050b12;
+  --navy-2: #0e1d30;
+  --emerald: #10b981;
+  --emerald-soft: rgba(16, 185, 129, 0.15);
+  --teal: #14b8a6;
+  --teal-hover: #2dd4bf;
+  --gold: #eab308;
+  --gold-soft: rgba(234, 179, 8, 0.14);
+  --soft: #17273d;
+  --green: #22c55e;
+  --green-soft: rgba(34, 197, 94, 0.14);
+  --red: #ef4444;
+  --red-dark: #b91c1c;
+  --red-soft: rgba(239, 68, 68, 0.16);
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', 'Noto Sans Bengali', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  transition: background 0.2s, color 0.2s;
+}
+
+button, input, select, textarea { font: inherit; }
+
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  background: var(--teal);
+  color: #fff;
+  font-weight: 600;
+  font-size: 13.5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  transition: transform 0.12s, background 0.15s, filter 0.15s;
+}
+button:hover { background: var(--teal-hover); }
+button:active { transform: scale(0.98); }
+button.secondary { background: var(--soft); color: var(--text); }
+button.secondary:hover { filter: brightness(0.93); }
+button.danger { background: var(--red); color: #fff; }
+button.danger:hover { background: var(--red-dark); }
+button.gold { background: var(--gold); color: #0f172a; font-weight: 700; }
+button.ghost { background: transparent; color: var(--text); padding: 7px 10px; }
+button.sm { padding: 6px 12px; font-size: 12px; border-radius: 8px; }
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--panel-2);
+  color: var(--text);
+  margin: 4px 0 12px;
+  font-size: 14px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.16);
+}
+textarea { min-height: 85px; resize: vertical; }
+label { display: block; font-size: 12.5px; font-weight: 600; color: var(--text); margin-top: 4px; }
+
+/* Shell Layout */
+.shell {
+  display: grid;
+  grid-template-columns: 275px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+  color: #fff;
+  padding: 18px 14px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  z-index: 40;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 6px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+.brand-text b { font-size: 18px; letter-spacing: 0.5px; display: block; line-height: 1.2; }
+.brand-text span { font-size: 10.5px; color: #a5b4fc; display: block; }
+.brand-tagline {
+  font-size: 11px;
+  color: #fde047;
+  padding: 8px 6px 4px;
+  font-weight: 600;
+}
+.nav { display: grid; gap: 4px; margin-top: 10px; flex: 1; }
+.nav button {
+  background: transparent;
+  color: #cbd5e1;
+  justify-content: flex-start;
+  text-align: left;
+  padding: 10px 12px;
+  font-size: 13.5px;
+  font-weight: 500;
+  border-radius: 10px;
+}
+.nav button:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+.nav button.active {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: inset 3px 0 0 var(--gold);
+}
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 35;
+  backdrop-filter: blur(2px);
+}
+.sidebar-backdrop.open { display: block; }
+
+/* Top Header */
+.main { min-width: 0; display: flex; flex-direction: column; }
+.top {
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  position: sticky;
+  top: 0;
+  z-index: 25;
+}
+.top-left { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.top-title h2 { font-size: 17px; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.top-title small { color: var(--muted); font-size: 12px; display: block; }
+.top-search { flex: 1; max-width: 360px; position: relative; }
+.top-search input { margin: 0; padding: 8px 12px 8px 36px; font-size: 13px; border-radius: 99px; }
+.top-search .search-ico { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); font-size: 13px; color: var(--muted); pointer-events: none; }
+.search-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  max-height: 340px;
+  overflow-y: auto;
+  z-index: 50;
+  padding: 6px;
+}
+.search-hit {
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--line);
+}
+.search-hit:last-child { border: 0; }
+.search-hit:hover { background: var(--soft); }
+.top-actions { display: flex; align-items: center; gap: 9px; flex-shrink: 0; }
+.avatar-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--soft);
+  color: var(--text);
+  padding: 5px 12px 5px 6px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.avatar-chip img, .avatar-fallback {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--teal);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Content Area */
+.content { padding: 20px 24px 40px; max-width: 1320px; width: 100%; margin: 0 auto; }
+.page { display: none; animation: fadeIn 0.18s ease; }
+.page.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Cards & Grids */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+  min-width: 0;
+}
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.card h3 { margin: 0; font-size: 16.5px; display: flex; align-items: center; gap: 9px; }
+.grid-6 { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-bottom: 16px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* Notice Banner */
+.urgent-banner {
+  background: linear-gradient(135deg, #991b1b 0%, #b91c1c 100%);
+  color: #ffffff;
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 24px rgba(185, 28, 28, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.urgent-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.urgent-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+.urgent-item {
+  background: rgba(0, 0, 0, 0.18);
+  border-left: 3px solid #fde047;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-top: 6px;
+}
+.urgent-item-head { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; align-items: center; }
+.urgent-item b { font-size: 14.5px; color: #fff; }
+.urgent-item p { margin: 4px 0 0; font-size: 13.5px; color: #fee2e2; }
+
+/* Islamic Welcome Card */
+.islamic-welcome-card {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
+  color: #fff;
+  border-radius: 20px;
+  padding: 26px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(217, 164, 65, 0.3);
+  box-shadow: var(--shadow-lg);
+}
+.islamic-welcome-card::after {
+  content: "";
+  position: absolute;
+  right: -50px;
+  top: -50px;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(217, 164, 65, 0.22) 0%, transparent 70%);
+  pointer-events: none;
+}
+.arabic-bismillah {
+  font-family: 'Amiri', serif;
+  font-size: 26px;
+  color: #fde047;
+  text-align: center;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+.arabic-dua {
+  font-family: 'Amiri', serif;
+  font-size: 22px;
+  color: #f6d58e;
+  margin: 10px 0 6px;
+}
+.durood-box {
+  background: rgba(0, 0, 0, 0.25);
+  border-left: 3px solid var(--gold);
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-top: 14px;
+  font-size: 14px;
+}
+
+/* Homepage Feature Button Grid */
+.home-section-title {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 24px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  border-bottom: 2px solid var(--line);
+  padding-bottom: 6px;
+}
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.feature-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  text-align: left;
+  transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+  width: 100%;
+  color: var(--text);
+}
+.feature-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--teal);
+  box-shadow: var(--shadow-lg);
+  background: var(--panel-2);
+}
+.feature-ico {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--soft);
+  color: var(--teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.feature-card b { font-size: 14.5px; line-height: 1.3; display: block; }
+.feature-card span { font-size: 12px; color: var(--muted); line-height: 1.35; display: block; }
+
+/* Clock & Calendar */
+.clock-card {
+  background: linear-gradient(145deg, var(--navy) 0%, #112a45 100%);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.clock-digits {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  font-variant-numeric: tabular-nums;
+  margin: 8px 0 4px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.clock-ampm {
+  font-size: 13.5px;
+  background: rgba(255, 255, 255, 0.16);
+  padding: 3px 8px;
+  border-radius: 6px;
+  color: #fde047;
+}
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+  text-align: center;
+}
+.cal-dow { font-size: 11px; font-weight: 700; color: var(--muted); padding: 4px 0; }
+.cal-day {
+  aspect-ratio: 1 / 1;
+  max-height: 42px;
+  width: 100%;
+  border-radius: 9px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 12.5px;
+  font-weight: 600;
+  background: var(--panel-2);
+  color: var(--text);
+  position: relative;
+  padding: 2px;
+}
+.cal-day.empty { background: transparent; cursor: default; }
+.cal-day.today { background: var(--teal); color: #fff; font-weight: 800; }
+.cal-day.selected { outline: 2px solid var(--gold); }
+.cal-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  position: absolute;
+  bottom: 3px;
+}
+.cal-day.today .cal-dot { background: #fff; }
+
+/* Stat Cards */
+.stat-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+.stat-card small { color: var(--muted); font-size: 12px; display: block; }
+.stat-card strong { font-size: 22px; display: block; margin-top: 4px; color: var(--text); }
+
+/* Progress & Badges */
+.progress { height: 9px; border-radius: 99px; background: var(--soft); overflow: hidden; margin-top: 8px; }
+.progress i { display: block; height: 100%; background: linear-gradient(90deg, var(--teal), var(--green)); transition: width 0.3s; }
+.pill { display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 99px; background: var(--soft); font-size: 11px; font-weight: 600; color: var(--text); }
+.pill.green { background: var(--green-soft); color: var(--green); }
+.pill.gold { background: var(--gold-soft); color: #9a6700; }
+[data-theme="dark"] .pill.gold { color: #fde047; }
+.pill.red { background: var(--red-soft); color: var(--red); }
+.pill.teal { background: rgba(13, 148, 136, 0.15); color: var(--teal); }
+
+/* Lists & Items */
+.item { padding: 12px 0; border-bottom: 1px solid var(--line); }
+.item:last-child { border: 0; padding-bottom: 0; }
+.item b { display: block; font-size: 14.5px; }
+.item p { margin: 5px 0; font-size: 13.5px; }
+.item small, .muted { color: var(--muted); font-size: 12px; }
+.actions { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 8px; }
+
+/* Calculator */
+.calc-wrap { max-width: 440px; margin: 0 auto; }
+.calc-screen {
+  background: #0b1626;
+  color: #f8fafc;
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  border: 1px solid #243b55;
+  text-align: right;
+}
+.calc-meta { display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #94a3b8; margin-bottom: 6px; }
+.calc-expr { min-height: 22px; font-size: 14px; color: #93c5fd; word-break: break-all; }
+.calc-out { font-size: 28px; font-weight: 800; word-break: break-all; margin-top: 4px; font-variant-numeric: tabular-nums; }
+.calc-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 7px; }
+.calc-grid button {
+  padding: 13px 4px;
+  font-size: 14px;
+  border-radius: 10px;
+  background: var(--panel-2);
+  color: var(--text);
+  border: 1px solid var(--line);
+}
+.calc-grid button:hover { background: var(--soft); }
+.calc-grid button.op { background: var(--soft); color: var(--teal); font-weight: 700; }
+.calc-grid button.fn { font-size: 12.5px; color: var(--muted); }
+.calc-grid button.eq { background: var(--teal); color: #fff; font-weight: 800; }
+.calc-grid button.ac { background: var(--red); color: #fff; }
+
+/* Tables & Quotes */
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { padding: 10px; text-align: left; border-bottom: 1px solid var(--line); }
+th { background: var(--soft); font-weight: 700; }
+.quote { background: var(--panel-2); border-left: 3px solid var(--gold); padding: 12px 14px; border-radius: 10px; margin: 8px 0; }
+.subjectrow { display: grid; grid-template-columns: 1fr 82px; gap: 8px; align-items: center; padding: 5px 0; border-bottom: 1px solid var(--line); }
+.subjectrow input { margin: 0; }
+.filelabel { display: inline-flex; align-items: center; gap: 6px; background: var(--soft); color: var(--text); padding: 9px 13px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 600; margin-bottom: 10px; }
+.thumb { max-width: 100%; max-height: 180px; border-radius: 10px; margin: 6px 0 10px; display: block; border: 1px solid var(--line); }
+.empty { padding: 20px; text-align: center; color: var(--muted); font-size: 13px; }
+.hidden { display: none !important; }
+
+/* Profile Banner */
+.profile-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 16px;
+}
+.profile-avatar-lg {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: linear-gradient(135deg, var(--navy), var(--teal));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 800;
+  border: 3px solid var(--gold);
+  flex-shrink: 0;
+}
+
+/* Formal Report Sheet */
+.report-sheet {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+  margin-top: 14px;
+}
+.report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  border-bottom: 2px solid var(--navy);
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.report-user-box {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 18px;
+  background: var(--panel-2);
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+
+/* Bottom Nav & Toast */
+.bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--panel);
+  border-top: 1px solid var(--line);
+  z-index: 30;
+  padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+}
+.bottom-nav button {
+  background: transparent;
+  color: var(--muted);
+  flex-direction: column;
+  padding: 6px 2px;
+  font-size: 10px;
+  gap: 3px;
+  border-radius: 8px;
+}
+.bottom-nav button.active { color: var(--teal); font-weight: 700; }
+.bottom-nav button span.ico { font-size: 18px; line-height: 1; }
+
+.toast {
+  position: fixed;
+  bottom: 76px;
+  right: 18px;
+  background: var(--navy);
+  color: #fff;
+  padding: 11px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: var(--shadow-lg);
+  z-index: 100;
+  border-left: 4px solid var(--gold);
+  animation: fadeIn 0.2s ease;
+}
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 90;
+}
+.modal-box {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+  max-width: 440px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+}
+
+.hamb { display: none; }
+.footer { text-align: center; color: var(--muted); font-size: 12px; padding: 24px 12px 10px; }
+
+/* Responsive Breakpoints */
+@media (max-width: 1100px) {
+  .feature-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 900px) {
+  .shell { display: block; }
+  .sidebar {
+    position: fixed;
+    left: -290px;
+    top: 0;
+    bottom: 0;
+    width: 275px;
+    transition: left 0.25s ease;
+  }
+  .sidebar.open { left: 0; }
+  .hamb { display: inline-flex; }
+  .top { padding: 10px 14px; }
+  .top-search { display: none; }
+  .content { padding: 14px 12px 86px; }
+  .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+  .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bottom-nav { display: grid; }
+}
+
+@media (max-width: 480px) {
+  .two, .report-user-box { grid-template-columns: 1fr; }
+  .feature-grid { grid-template-columns: 1fr; }
+  .clock-digits { font-size: 30px; }
+  .avatar-chip span.chip-name { display: none; }
+}
+
+@media print {
+  .sidebar, .top, .bottom-nav, .no-print, button, .toast { display: none !important; }
+  .shell { display: block; }
+  .content { padding: 0; max-width: 100%; }
+  .page { display: none !important; }
+  #page-statement { display: block !important; }
+  .card, .report-sheet { box-shadow: none; border: 0; padding: 0; }
+  body { background: #fff; color: #000; }
+}
+</style>
+</head>
+<body>
+
+<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+<div class="shell">
+  <!-- SIDEBAR NAVIGATION -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <svg width="42" height="42" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <rect width="48" height="48" rx="12" fill="#0d9488"/>
+        <path d="M24 6L28.5 13.5L37 15L31.5 21.5L32.5 30L24 26.2L15.5 30L16.5 21.5L11 15L19.5 13.5L24 6Z" fill="#d9a441" fill-opacity="0.32"/>
+        <path d="M11 18.5C15.5 17.5 20.5 19 24 22C27.5 19 32.5 17.5 37 18.5V34.5C32.5 33.5 27.5 35 24 38C20.5 35 15.5 33.5 11 34.5V18.5Z" stroke="#fef08a" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M24 22V38" stroke="#fef08a" stroke-width="2.2"/>
+        <circle cx="24" cy="12" r="2.6" fill="#fef08a"/>
+      </svg>
+      <div class="brand-text">
+        <b>ILMORA • ইলমোরা</b>
+        <span>Smart Education Ecosystem</span>
+      </div>
+    </div>
+    <div class="brand-tagline">✨ Learn, Organize, Calculate &amp; Grow.</div>
+
+    <nav class="nav" id="nav">
+      <button class="active" data-page="home" data-i18n="nav_home">🏠 হোম ড্যাশবোর্ড</button>
+      <button data-page="islamic" data-i18n="nav_islamic">🕌 ইসলামিক কর্ণার</button>
+      <button data-page="subjects" data-i18n="nav_subjects">📚 ১৪ বিষয় ও সিলেবাস</button>
+      <button data-page="library" data-i18n="nav_library">📖 ডিজিটাল লাইব্রেরি</button>
+      <button data-page="publishers" data-i18n="nav_publishers">🏛️ প্রকাশনা ও গাইড সেন্টার</button>
+      <button data-page="suggestions" data-i18n="nav_suggestions">💡 গুরুত্বপূর্ণ সাজেশন</button>
+      <button data-page="timer" data-i18n="nav_timer">⏰ স্টাডি অ্যালার্ম ও টাইমার</button>
+      <button data-page="exams" data-i18n="nav_exams">📝 অনলাইন পরীক্ষা ও প্রশ্ন</button>
+      <button data-page="routine" data-i18n="nav_routine">🗓️ দৈনিক ও রুটিন</button>
+      <button data-page="notes" data-i18n="nav_notes">📝 নোট ও ছবির খাতা</button>
+      <button data-page="tools" data-i18n="nav_tools">🧮 ক্যালকুলেটর ও সূত্র</button>
+      <button data-page="statement" data-i18n="nav_statement">📊 রিপোর্ট ও অ্যানালিটিক্স</button>
+      <button data-page="settings" data-i18n="nav_settings">👤 প্রোফাইল ও সেটিংস</button>
+    </nav>
+  </aside>
+
+  <!-- MAIN APP CONTAINER -->
+  <div class="main">
+    <header class="top no-print">
+      <div class="top-left">
+        <button class="hamb secondary sm" id="hamb" aria-label="Menu">☰</button>
+        <div class="top-title">
+          <h2 id="pageTitle">হোম ড্যাশবোর্ড</h2>
+          <small id="todayText"></small>
+        </div>
+      </div>
+
+      <div class="top-search">
+        <span class="search-ico">🔍</span>
+        <input type="search" id="globalSearch" placeholder="নোট, বই, ক্লাস, সাজেশন খুঁজুন..." autocomplete="off">
+        <div class="search-dropdown hidden" id="searchDropdown"></div>
+      </div>
+
+      <div class="top-actions">
+        <button class="secondary sm" id="themeBtn" title="Theme">🌙</button>
+        <button class="secondary sm" id="langBtn">EN</button>
+        <div class="avatar-chip" id="topProfileBtn" title="Profile">
+          <span class="avatar-fallback" id="topAvatar">S</span>
+          <span class="chip-name" id="topUserName">Salman</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+      <!-- ==================== HOME DASHBOARD ==================== -->
+      <section class="page active" id="page-home">
+        <!-- 1. NOTICE BANNER -->
+        <div class="urgent-banner" id="urgentBanner">
+          <div class="urgent-top">
+            <span class="urgent-badge">📢 <span data-i18n="important_notice">গুরুত্বপূর্ণ ঘোষণা / ANNOUNCEMENT</span></span>
+            <button class="sm" style="background:rgba(255,255,255,0.2);color:#fff" onclick="goPage('settings')" data-i18n="manage_notices">+ নোটিশ পরিচালনা</button>
+          </div>
+          <div id="homeNotices"></div>
+        </div>
+
+        <!-- 2. ISLAMIC WELCOME CARD -->
+        <div class="islamic-welcome-card">
+          <div class="arabic-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+          <div style="text-align:center;">
+            <h1 id="welcome" style="margin:4px 0; font-size:22px;">আসসালামু আলাইকুম, সালমান ফারশী!</h1>
+            <p style="color:#e2e8f0; margin:0; font-size:13.5px;" data-i18n="hero_sub">ILMORA — International-Grade Smart Education Ecosystem &amp; Management Hub</p>
+          </div>
+          <div class="arabic-dua">رَبِّ زِدْنِي عِلْمًا</div>
+          <div style="font-size:13px; color:#fde047; margin-bottom:10px;">বাংলা অর্থ: হে আমার রব! আমার জ্ঞান বৃদ্ধি করুন। (সূরা ত্ব-হা, ২০:১১৪)</div>
+          <div class="durood-box">
+            <b>দরুদ শরিফ:</b> "আল্লাহুম্মা সাল্লি আলা মুহাম্মাদিও ওয়া আলা আলি মুহাম্মাদ"<br>
+            <small style="color:#cbd5e1;">অর্থ: হে আল্লাহ, মুহাম্মদ (সা:) ও তাঁর পরিবারের ওপর রহমত বর্ষণ করুন।</small>
+          </div>
+        </div>
+
+        <!-- 3. HOMEPAGE ACTION BUTTON GRID -->
+        <div class="home-section-title">🕌 <span data-i18n="sec_islamic">ইসলামিক লার্নিং ও স্পিরিচুয়াল সেন্টার</span></div>
+        <div class="feature-grid">
+          <button class="feature-card" onclick="goPage('islamic')"><div class="feature-ico">🕌</div><div><b>ইসলামিক কর্ণার</b><span>কোরআন, হাদিস ও দোয়া</span></div></button>
+          <button class="feature-card" onclick="openIslamicCategory('Quran')"><div class="feature-ico">📖</div><div><b>কোরআন ও সূরা</b><span>তিলাওয়াত ও অনুবাদ</span></div></button>
+          <button class="feature-card" onclick="openIslamicCategory('Dua')"><div class="feature-ico">🤲</div><div><b>দোয়া ও হাদিস</b><span>মাসনুন দোয়া ও জিকির</span></div></button>
+        </div>
+
+        <div class="home-section-title">📚 <span data-i18n="sec_academic">একাডেমিক বিষয়সমূহ ও সিলেবাস</span></div>
+        <div class="feature-grid" id="homeSubjectsGrid">
+          <!-- Dynamically populated subject buttons -->
+        </div>
+
+        <div class="home-section-title">🏛️ <span data-i18n="sec_library">ডিজিটাল লাইব্রেরি ও প্রকাশনা কেন্দ্র</span></div>
+        <div class="feature-grid">
+          <button class="feature-card" onclick="goPage('library')"><div class="feature-ico">📖</div><div><b>ডিজিটাল লাইব্রেরি</b><span>টেক্সটবুক, গাইড ও PDF</span></div></button>
+          <button class="feature-card" onclick="goPage('publishers')"><div class="feature-ico">🏛️</div><div><b>প্রকাশনা সেন্টার</b><span>আল-ফাতাহ, লেকচার ও দর্শন</span></div></button>
+          <button class="feature-card" onclick="goPage('publishers')"><div class="feature-ico">🌐</div><div><b>অনলাইন মাদরাসা</b><span>অ্যাট-তাদরিস ও ই-লার্নিং</span></div></button>
+          <button class="feature-card" onclick="goPage('suggestions')"><div class="feature-ico">💡</div><div><b>গুরুত্বপূর্ণ সাজেশন</b><span>পরীক্ষার নোট ও প্রশ্ন</span></div></button>
+          <button class="feature-card" onclick="openPublisherDetail('আল-ফাতাহ পাবলিকেশনস')"><div class="feature-ico">📘</div><div><b>আল-ফাতাহ</b><span>গাইড ও সাজেশন</span></div></button>
+          <button class="feature-card" onclick="openPublisherDetail('লেকচার পাবলিকেশনস')"><div class="feature-ico">📙</div><div><b>লেকচার পাবলিকেশনস</b><span>টেক্সটবুক ও নোট</span></div></button>
+          <button class="feature-card" onclick="openPublisherDetail('দর্শন পাবলিকেশনস')"><div class="feature-ico">📗</div><div><b>দর্শন পাবলিকেশনস</b><span>সহায়ক কিতাব</span></div></button>
+          <button class="feature-card" onclick="openPublisherDetail('অ্যাট-তাদরিস অনলাইন মাদরাসা')"><div class="feature-ico">🕌</div><div><b>অ্যাট-তাদরিস</b><span>অনলাইন মাদরাসা</span></div></button>
+        </div>
+
+        <div class="home-section-title">🧮 <span data-i18n="sec_tools">স্টাডি টুলস ও প্রোডাক্টিভিটি</span></div>
+        <div class="feature-grid">
+          <button class="feature-card" onclick="goPage('timer')"><div class="feature-ico">⏰</div><div><b>স্টাডি অ্যালার্ম</b><span>সেশন টাইমার ও কাউন্টডাউন</span></div></button>
+          <button class="feature-card" onclick="goPage('exams')"><div class="feature-ico">📝</div><div><b>অনলাইন পরীক্ষা</b><span>মডেল টেস্ট ও প্রশ্নব্যাংক</span></div></button>
+          <button class="feature-card" onclick="goPage('routine')"><div class="feature-ico">🗓️</div><div><b>দৈনিক রুটিন</b><span>ক্লাস ও পড়ার সময়সূচি</span></div></button>
+          <button class="feature-card" onclick="goPage('notes')"><div class="feature-ico">📓</div><div><b>নোট ও ছবির খাতা</b><span>ব্যক্তিগত স্টাডি নোট</span></div></button>
+          <button class="feature-card" onclick="goPage('tools')"><div class="feature-ico">🧮</div><div><b>সায়েন্টিফিক ক্যালকুলেটর</b><span>গণিত ও ফর্মুলা ব্যাংক</span></div></button>
+          <button class="feature-card" onclick="goPage('statement')"><div class="feature-ico">📊</div><div><b>রিপোর্ট ও অ্যানালিটিক্স</b><span>স্টাডি গ্রাফ ও PDF প্রিন্ট</span></div></button>
+          <button class="feature-card" onclick="goPage('settings')"><div class="feature-ico">👤</div><div><b>প্রোফাইল</b><span>ইউজার আইডি ও ব্যাকআপ</span></div></button>
+          <button class="feature-card" onclick="goPage('settings')"><div class="feature-ico">⚙️</div><div><b>সেটিংস</b><span>থিম, ভাষা ও ডেটা ম্যানেজমেন্ট</span></div></button>
+        </div>
+
+        <!-- 4. STATS & CLOCK -->
+        <div class="grid-2" style="margin-top:20px;">
+          <div class="card clock-card">
+            <div class="card-head">
+              <h3 style="color:#fff">🕒 <span data-i18n="clock_title">ডিজিটাল ঘড়ি</span></h3>
+              <button class="sm" id="clockFormatBtn" style="background:rgba(255,255,255,0.16);color:#fff">12H / 24H</button>
+            </div>
+            <div>
+              <div class="clock-digits">
+                <span id="clockTime">00:00:00</span>
+                <span class="clock-ampm" id="clockAmPm">AM</span>
+              </div>
+              <div class="clock-date" id="clockFullDate" style="color:#cbd5e1;font-size:13.5px;"></div>
+            </div>
+            <div style="margin-top:14px;font-size:12px;color:#fde047" data-i18n="clock_note">সময়ের সদ্ব্যবহারই সফলতার মূল চাবিকাঠি।</div>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <h3>📅 <span id="calMonthTitle">ক্যালেন্ডার</span></h3>
+              <div style="display:flex;gap:5px">
+                <button class="secondary sm" id="calPrev">◀</button>
+                <button class="secondary sm" id="calToday" data-i18n="today_btn">আজ</button>
+                <button class="secondary sm" id="calNext">▶</button>
+              </div>
+            </div>
+            <div class="cal-grid" id="calGrid"></div>
+            <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--line)">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+                <small id="calSelectedLabel" class="muted"></small>
+                <button class="secondary sm" id="addCalEventBtn" data-i18n="add_reminder">+ রিমাইন্ডার</button>
+              </div>
+              <div id="calSelectedDetails" style="margin-top:6px;font-size:12.5px"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== ISLAMIC CORNER ==================== -->
+      <section class="page" id="page-islamic">
+        <div class="card" style="background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff;">
+          <h2 style="margin:0 0 6px">🕌 ইসলামিক কর্ণার (Islamic Corner)</h2>
+          <p style="margin:0; color:#cbd5e1; font-size:13.5px;">পবিত্র কুরআন, হাদিস, মাসনুন দোয়া, তাসবিহ এবং ইসলামিক স্টাডি রিসোর্সের সমন্বিত কেন্দ্র।</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-head">
+              <h3>📖 পবিত্র কুরআন ও সূরা</h3>
+              <button class="sm" onclick="openIslamicAddModal('Quran')">+ নতুন যোগ করুন</button>
+            </div>
+            <div id="islamicQuranList"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <h3>🤲 মাসনুন দোয়া ও হাদিস</h3>
+              <button class="sm" onclick="openIslamicAddModal('Dua')">+ নতুন যোগ করুন</button>
+            </div>
+            <div id="islamicDuaList"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>⏱️ দৈনিক ইসলামিক ইবাদত ও আমল চেকলিস্ট</h3></div>
+          <div style="display:grid; gap:8px;">
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" style="width:18px;height:18px;margin:0"> ফজর সালাত জামাতে আদায় ও তিলাওয়াত</label>
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" style="width:18px;height:18px;margin:0"> দৈনিক নির্দিষ্ট পৃষ্ঠা কুরআন তিলাওয়াত ও অর্থ অনুধাবন</label>
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" style="width:18px;height:18px;margin:0"> যোহর, আসর, মাগরিব ও এশা সালাত জামাতে আদায়</label>
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" style="width:18px;height:18px;margin:0"> সকালে ও সন্ধ্যায় মাসনুন দোয়া ও ইস্তিগফার পাঠ</label>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SUBJECT DASHBOARD (SEPARATE VIEW) ==================== -->
+      <section class="page" id="page-subject-detail">
+        <div class="card" style="background: linear-gradient(135deg, var(--teal) 0%, #0f766e 100%); color:#fff;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <div>
+              <button class="secondary sm" onclick="goPage('subjects')" style="background:rgba(255,255,255,0.2); color:#fff; margin-bottom:8px;">← সব বিষয়</button>
+              <h2 id="subjectDetailTitle" style="margin:0; font-size:24px;">বিষয় ড্যাশবোর্ড</h2>
+            </div>
+            <button class="gold sm" onclick="openSubjectResourceModalFromDetail()">+ এই বিষয়ে রিসোর্স যোগ করুন</button>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-head"><h3>🎥 ভিডিও ক্লাস ও লেকচার</h3></div>
+            <div id="subjectDetailVideos"></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>📄 PDF নোট ও গাইড</h3></div>
+            <div id="subjectDetailPdfs"></div>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-head"><h3>💡 গুরুত্বপূর্ণ সাজেশন</h3></div>
+            <div id="subjectDetailSuggestions"></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>📝 অনলাইন পরীক্ষা ও কুইজ</h3></div>
+            <div id="subjectDetailExams"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SUBJECTS & SYLLABUS ==================== -->
+      <section class="page" id="page-subjects">
+        <div class="card">
+          <div class="card-head">
+            <h3>📚 ১৪ বিষয় ও সিলেবাস ড্যাশবোর্ড</h3>
+            <button class="sm" onclick="openSubjectAddModal()">+ নতুন বিষয় যোগ করুন</button>
+          </div>
+          <p class="muted">নিচের বিষয়গুলোতে ক্লিক করে প্রতিটি বিষয়ের আলাদা ড্যাশবোর্ড (ভিডিও, PDF, সাজেশন ও পরীক্ষা) দেখতে পারেন।</p>
+          <div class="feature-grid" id="subjectsDashboardGrid" style="margin-top:16px"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>⚙️ ১৪ বিষয়ের তালিকা সম্পাদনা</h3></div>
+          <div id="subjectEditor"></div>
+          <button id="saveSubjects" style="margin-top:10px">বিষয় সংরক্ষণ করুন</button>
+        </div>
+      </section>
+
+      <!-- ==================== DIGITAL LIBRARY ==================== -->
+      <section class="page" id="page-library">
+        <div class="card">
+          <div class="card-head">
+            <h3>📖 ডিজিটাল লাইব্রেরি (Digital Library)</h3>
+            <button class="sm" onclick="openLibraryModal()">+ নতুন বই / PDF যোগ করুন</button>
+          </div>
+          <p class="muted">টেক্সটবুক, গাইডবুক, ইসলামিক কিতাব এবং রেফারেন্স ম্যাটেরিয়াল।</p>
+          <div class="grid-3" id="libraryBookGrid" style="margin-top:14px"></div>
+        </div>
+      </section>
+
+      <!-- ==================== PUBLISHERS & GUIDE CENTER ==================== -->
+      <section class="page" id="page-publishers">
+        <div class="card">
+          <div class="card-head">
+            <h3>🏛️ প্রকাশনা ও গাইড সেন্টার (Publishers & Guide Center)</h3>
+            <button class="sm" onclick="openPublisherModal()">+ প্রকাশনা বা গাইড যোগ করুন</button>
+          </div>
+          <p class="muted">আল-ফাতাহ, লেকচার পাবলিকেশনস, দর্শন পাবলিকেশনস ও অন্যান্য অনুমোদিত স্টাডি গাইড।</p>
+          <div class="grid-3" id="publishersGrid" style="margin-top:14px"></div>
+        </div>
+      </section>
+
+      <!-- ==================== IMPORTANT SUGGESTIONS ==================== -->
+      <section class="page" id="page-suggestions">
+        <div class="card">
+          <div class="card-head">
+            <h3>💡 গুরুত্বপূর্ণ সাজেশন সেন্টার (Important Suggestions)</h3>
+            <button class="sm" onclick="openSuggestionModal()">+ নতুন সাজেশন যোগ করুন</button>
+          </div>
+          <p class="muted">পরীক্ষামুখী গুরুত্বপূর্ণ প্রশ্ন, অধ্যায়ভিত্তিক সাজেশন, PDF ও চিত্রভিত্তিক নোট।</p>
+          <div id="suggestionsList" style="margin-top:14px"></div>
+        </div>
+      </section>
+
+      <!-- ==================== STUDY TIMER & ALARM ==================== -->
+      <section class="page" id="page-timer">
+        <div class="grid-2">
+          <div class="card" style="text-align:center;">
+            <div class="card-head">
+              <h3>⏰ স্টাডি সেশন ও কাউন্টডাউন টাইমার</h3>
+              <button class="sm" onclick="openAlarmSettingsModal()">+ সেশন রুটিন যোগ</button>
+            </div>
+            <label style="text-align:left;">বিষয় নির্বাচন করুন</label>
+            <select id="timerSubjectSelect"></select>
+            <div class="two">
+              <div><label style="text-align:left;">সময় (মিনিট)</label><input type="number" id="timerMins" value="30" min="1"></div>
+              <div><label style="text-align:left;">সেশন টাইপ</label><select id="timerType"><option>পড়াশোনা</option><option>মুখস্থ</option><option>রিভিশন</option><option>ব্রেক</option></select></div>
+            </div>
+            <div style="font-size:48px; font-weight:800; color:var(--teal); margin:20px 0; font-variant-numeric:tabular-nums;" id="timerDisplay">30:00</div>
+            <div class="actions" style="justify-content:center;">
+              <button id="startTimerBtn">শুরু করুন</button>
+              <button class="secondary" id="pauseTimerBtn">থামান</button>
+              <button class="danger" id="resetTimerBtn">রিসেট</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h3>⏱️ স্টাডি অ্যালার্ম রুটিন ও সেশন লগ</h3></div>
+            <div id="alarmRoutineList" style="margin-bottom:14px"></div>
+            <div id="timerLogList"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== ONLINE EXAMS & QUESTION BANK ==================== -->
+      <section class="page" id="page-exams">
+        <div class="card">
+          <div class="card-head">
+            <h3>📝 অনলাইন পরীক্ষা ও প্রশ্নব্যাংক</h3>
+            <button class="sm" onclick="openExamModal()">+ নতুন পরীক্ষা বা প্রশ্ন তৈরি করুন</button>
+          </div>
+          <p class="muted">বিষয়ভিত্তিক মডেল টেস্ট, এমসিকিউ কুইজ ও প্রশ্নব্যাংক।</p>
+          <div class="grid-2" id="examListGrid" style="margin-top:14px"></div>
+        </div>
+      </section>
+
+      <!-- ==================== DAILY ROUTINE ==================== -->
+      <section class="page" id="page-routine">
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-head"><h3>🗓️ সাপ্তাহিক ও দৈনিক রুটিন যোগ করুন</h3></div>
+            <label>দিন</label>
+            <select id="routineDay">
+              <option>প্রতিদিন</option><option>শনিবার</option><option>রবিবার</option><option>সোমবার</option>
+              <option>মঙ্গলবার</option><option>বুধবার</option><option>বৃহস্পতিবার</option><option>শুক্রবার</option>
+            </select>
+            <div class="two">
+              <div><label>সময়</label><input id="routineTime" placeholder="সকাল ৬:০০–৭:০০"></div>
+              <div><label>বিষয় / কাজ</label><input id="routineSubject" placeholder="কুরআন তিলাওয়াত / গণিত"></div>
+            </div>
+            <button id="addRoutineBtn">রুটিনে যোগ করো</button>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h3>📋 বর্তমান রুটিন ও সময়সূচি</h3></div>
+            <div id="routineList"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== NOTES & PHOTOBOOK ==================== -->
+      <section class="page" id="page-notes">
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-head"><h3>📝 ব্যক্তিগত নোট ও ছবির খাতা</h3></div>
+            <label>নোটের শিরোনাম</label><input id="noteTitle" placeholder="নোটের শিরোনাম">
+            <label>বিষয়</label><select id="noteSubject"></select>
+            <label>নোটের বিবরণ</label><textarea id="noteBody" rows="5" placeholder="বিস্তারিত লিখুন..."></textarea>
+            <label class="filelabel">📷 বই বা খাতার ছবি যুক্ত করুন<input type="file" id="noteImage" accept="image/*" hidden></label>
+            <div id="imagePreview"></div>
+            <button id="saveNoteBtn">নোট সংরক্ষণ করুন</button>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h3>📒 সংরক্ষিত নোটসমূহ</h3></div>
+            <div id="noteList"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== CALCULATOR & FORMULAS ==================== -->
+      <section class="page" id="page-tools">
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-head">
+              <h3>🧮 সায়েন্টিফিক ক্যালকুলেটর</h3>
+              <button class="secondary sm" id="calcModeBtn">DEG</button>
+            </div>
+            <div class="calc-wrap">
+              <div class="calc-screen">
+                <div class="calc-meta"><span id="calcAngleLabel">ANGLE: DEG</span><span>ILMORA CALC</span></div>
+                <div class="calc-expr" id="calcExpr">0</div>
+                <div class="calc-out" id="calcOut">0</div>
+              </div>
+              <div class="calc-grid" id="calcPad">
+                <button class="fn" data-val="sin(">sin</button><button class="fn" data-val="cos(">cos</button><button class="fn" data-val="tan(">tan</button><button class="fn" data-val="log(">log</button><button class="fn" data-val="ln(">ln</button>
+                <button class="fn" data-val="√(">√</button><button class="fn" data-val="^2">x²</button><button class="fn" data-val="^">xʸ</button><button class="fn" data-val="π">π</button><button class="fn" data-val="e">e</button>
+                <button class="op" data-val="(">(</button><button class="op" data-val=")">)</button><button class="op" data-val="%">%</button><button class="op" data-act="del">DEL</button><button class="ac" data-act="ac">AC</button>
+                <button data-val="7">7</button><button data-val="8">8</button><button data-val="9">9</button><button class="op" data-val="÷">÷</button><button class="fn" data-act="ans">ANS</button>
+                <button data-val="4">4</button><button data-val="5">5</button><button data-val="6">6</button><button class="op" data-val="×">×</button><button class="op" data-val="-">−</button>
+                <button data-val="1">1</button><button data-val="2">2</button><button data-val="3">3</button><button class="op" data-val="+">+</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button>
+                <button data-val="0" style="grid-column:span 2">0</button><button data-val=".">.</button><button class="fn" data-val="00">00</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h3>📐 গুরুত্বপূর্ণ সূত্র ও ফর্মুলা ব্যাংক</h3></div>
+            <label>সূত্রের নাম</label><input id="formulaTitle" placeholder="যেমন: বীজগণিত সূত্র">
+            <label>সূত্র</label><textarea id="formulaBody" placeholder="(a + b)² = a² + 2ab + b²"></textarea>
+            <button id="saveFormulaBtn">সূত্র সংরক্ষণ করুন</button>
+            <div id="formulaList" style="margin-top:12px"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== REPORTS & ANALYTICS ==================== -->
+      <section class="page" id="page-statement">
+        <div class="card no-print">
+          <div class="card-head"><h3>📊 প্রফেশনাল রিপোর্ট ও অ্যানালিটিক্স</h3></div>
+          <div class="grid-3">
+            <div><label>শুরুর তারিখ</label><input type="date" id="fromDate"></div>
+            <div><label>শেষের তারিখ</label><input type="date" id="toDate"></div>
+            <div><label>রিপোর্টের ধরন</label><select id="reportType"><option value="all">সম্পূর্ণ স্টাডি ও কার্যক্রম</option><option value="study">শুধু স্টাডি সেশন</option></select></div>
+          </div>
+          <div class="actions">
+            <button id="makeStatement">রিপোর্ট তৈরি করুন</button>
+            <button class="gold" id="printStatement">🖨️ PDF / প্রিন্ট করুন</button>
+            <button class="secondary" id="exportCsvBtn">📥 CSV ডাউনলোড</button>
+          </div>
+        </div>
+        <div id="statementResult"></div>
+      </section>
+
+      <!-- ==================== PROFILE & SETTINGS ==================== -->
+      <section class="page" id="page-settings">
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-head">
+              <h3>👤 শিক্ষার্থী প্রোফাইল</h3>
+              <span class="pill teal" id="profileCompletionBadge">0% Complete</span>
+            </div>
+            <div class="profile-banner">
+              <div class="profile-avatar-lg" id="profileAvatarBox">S</div>
+              <div style="flex:1;min-width:180px">
+                <b style="font-size:18px;display:block" id="profileDisplayName">Salman Farshi</b>
+                <small class="muted" id="profileDisplayMeta">ID: ILM-2027-001 • Dakhil 2027</small>
+                <div style="margin-top:8px">
+                  <label class="filelabel" style="margin:0">📷 ছবি আপলোড<input type="file" id="profilePhoto" accept="image/*" hidden></label>
+                </div>
+              </div>
+            </div>
+            <div class="two">
+              <div><label>পূর্ণ নাম</label><input id="profileName" placeholder="Full Name"></div>
+              <div><label>ইউজার আইডি</label><input id="profileUserId" placeholder="ILM-2027-001"></div>
+            </div>
+            <div class="two">
+              <div><label>শিক্ষা প্রতিষ্ঠান</label><input id="profileInstitution" placeholder="মাদরাসা / স্কুল"></div>
+              <div><label>শ্রেণি / ব্যাচ</label><input id="profileClass" placeholder="Dakhil 2027"></div>
+            </div>
+            <div class="two">
+              <div><label>ইমেইল</label><input id="profileEmail" type="email" placeholder="email@gmail.com"></div>
+              <div><label>মোবাইল নম্বর</label><input id="profilePhone" placeholder="01XXXXXXXXX"></div>
+            </div>
+            <button id="saveProfileBtn" style="margin-top:10px">প্রোফাইল সংরক্ষণ করুন</button>
+          </div>
+
+          <div>
+            <div class="card">
+              <div class="card-head"><h3>⚙️ অ্যাপ সেটিংস ও নোটিশ পরিচালনা</h3></div>
+              <label>ভাষা / Language</label>
+              <select id="languageSelect"><option value="bn">বাংলা (Bangla)</option><option value="en">English</option></select>
+              <label>থিম মোড (Theme)</label>
+              <select id="themeSelect"><option value="light">Light Mode</option><option value="dark">Dark Mode</option></select>
+              
+              <h4 style="margin:16px 0 8px">📢 হোমপেজ নোটিশ প্রকাশ</h4>
+              <label>নোটিশ শিরোনাম</label><input id="noticeTitleInput" placeholder="জরুরি ঘোষণা">
+              <label>নোটিশ বিবরণ</label><textarea id="noticeBodyInput" placeholder="বিবরণ লিখুন..."></textarea>
+              <button id="publishNoticeBtn">নোটিশ প্রকাশ করুন</button>
+
+              <h4 style="margin:20px 0 8px">🛠️ ম্যানেজমেন্ট সেন্টার</h4>
+              <div class="actions">
+                <button class="secondary sm" onclick="openIslamicAddModal('Quran')">+ ইসলামিক কন্টেন্ট ম্যানেজার</button>
+                <button class="secondary sm" onclick="openSubjectResourceModal('video')">+ সাবজেক্ট রিসোর্স ম্যানেজার</button>
+                <button class="secondary sm" onclick="openSuggestionModal()">+ সাজেশন ম্যানেজার</button>
+                <button class="secondary sm" onclick="openPublisherModal()">+ পাবলিশার ম্যানেজার</button>
+                <button class="secondary sm" onclick="openAlarmSettingsModal()">+ অ্যালার্ম রুটিন ম্যানেজার</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-head"><h3>💾 ডেটা ব্যাকআপ ও রিস্টোর</h3></div>
+              <div class="actions">
+                <button id="exportJsonBtn">📤 JSON ব্যাকআপ</button>
+                <label class="filelabel" style="margin:0">📥 রিস্টোর<input type="file" id="importJsonInput" accept=".json" hidden></label>
+                <button class="danger" id="resetDataBtn">সব রিসেট</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer no-print">
+        <b>ILMORA (ইলমোরা) — International-Grade Smart Education Ecosystem</b> • Learn, Organize, Calculate &amp; Grow.<br>
+        <span id="footerSite">salmanfarshi1630.github.io</span>
+      </footer>
+    </main>
+  </div>
+</div>
+
+<!-- BOTTOM NAV FOR MOBILE -->
+<nav class="bottom-nav no-print" id="bottomNav">
+  <button class="active" data-page="home"><span class="ico">🏠</span><span>হোম</span></button>
+  <button data-page="islamic"><span class="ico">🕌</span><span>ইসলামিক</span></button>
+  <button data-page="subjects"><span class="ico">📚</span><span>সিলেবাস</span></button>
+  <button data-page="tools"><span class="ico">🧮</span><span>হিসাব</span></button>
+  <button data-page="settings"><span class="ico">👤</span><span>প্রোফাইল</span></button>
+</nav>
+
+<!-- UNIVERSAL MODAL -->
+<div class="modal-backdrop hidden" id="modalBackdrop">
+  <div class="modal-box" id="modalBoxContainer">
+    <h3 id="modalTitle" style="margin:0 0 10px"></h3>
+    <div id="modalBodyContent"></div>
+    <div class="actions" style="justify-content:flex-end; margin-top:14px;">
+      <button class="secondary" id="modalCancelBtn">বাতিল</button>
+      <button id="modalOkBtn">সংরক্ষণ</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ==========================================================================
+   ILMORA ECOSYSTEM ENGINE & DATA ARCHITECTURE (PRESERVED & EXTENDED)
+   ========================================================================== */
+const I18N = {
+  bn: {
+    nav_home: '🏠 হোম ড্যাশবোর্ড',
+    nav_islamic: '🕌 ইসলামিক কর্ণার',
+    nav_subjects: '📚 ১৪ বিষয় ও সিলেবাস',
+    nav_library: '📖 ডিজিটাল লাইব্রেরি',
+    nav_publishers: '🏛️ প্রকাশনা ও গাইড সেন্টার',
+    nav_suggestions: '💡 গুরুত্বপূর্ণ সাজেশন',
+    nav_timer: '⏰ স্টাডি অ্যালার্ম ও টাইমার',
+    nav_exams: '📝 অনলাইন পরীক্ষা ও প্রশ্ন',
+    nav_routine: '🗓️ দৈনিক ও রুটিন',
+    nav_notes: '📝 নোট ও ছবির খাতা',
+    nav_tools: '🧮 ক্যালকুলেটর ও সূত্র',
+    nav_statement: '📊 রিপোর্ট ও অ্যানালিটিক্স',
+    nav_settings: '👤 প্রোফাইল ও সেটিংস',
+    important_notice: 'গুরুত্বপূর্ণ ঘোষণা / ANNOUNCEMENT',
+    manage_notices: '+ নোটিশ পরিচালনা',
+    hero_sub: 'ILMORA — International-Grade Smart Education Ecosystem & Management Hub',
+    sec_islamic: 'ইসলামিক লার্নিং ও স্পিরিচুয়াল সেন্টার',
+    sec_academic: 'একাডেমিক বিষয়সমূহ ও সিলেবাস',
+    sec_library: 'ডিজিটাল লাইব্রেরি ও প্রকাশনা কেন্দ্র',
+    sec_tools: 'স্টাডি টুলস ও প্রোডাক্টিভিটি',
+    clock_title: 'ডিজিটাল ঘড়ি',
+    clock_note: 'সময়ের সদ্ব্যবহারই সফলতার মূল চাবিকাঠি।',
+    today_btn: 'আজ',
+    add_reminder: '+ রিমাইন্ডার'
+  },
+  en: {
+    nav_home: '🏠 Home Dashboard',
+    nav_islamic: '🕌 Islamic Corner',
+    nav_subjects: '📚 14 Subjects & Syllabus',
+    nav_library: '📖 Digital Library',
+    nav_publishers: '🏛️ Publishers & Guides',
+    nav_suggestions: '💡 Study Suggestions',
+    nav_timer: '⏰ Study Alarm & Timer',
+    nav_exams: '📝 Online Exams & Q-Bank',
+    nav_routine: '🗓️ Daily Routine',
+    nav_notes: '📝 Notes & Photo Book',
+    nav_tools: '🧮 Calculator & Formulas',
+    nav_statement: '📊 Reports & Analytics',
+    nav_settings: '👤 Profile & Settings',
+    important_notice: 'IMPORTANT ANNOUNCEMENT',
+    manage_notices: '+ Manage Notices',
+    hero_sub: 'ILMORA — International-Grade Smart Education Ecosystem & Management Hub',
+    sec_islamic: 'Islamic Learning & Spiritual Center',
+    sec_academic: 'Academic Subjects & Syllabus',
+    sec_library: 'Digital Library & Publications',
+    sec_tools: 'Study Tools & Productivity',
+    clock_title: 'Digital Clock',
+    clock_note: 'Disciplined time management leads to excellence.',
+    today_btn: 'Today',
+    add_reminder: '+ Reminder'
+  }
+};
+
+const $ = id => document.getElementById(id);
+const todayStr = () => new Date().toLocaleDateString('en-CA');
+
+const DEFAULT_SUBJECTS = [
+  'কুরআন মাজিদ', 'হাদিস শরিফ', 'আকাইদ ও ফিকহ', 'আরবি ১ম পত্র', 'আরবি ২য় পত্র',
+  'বাংলা ১ম পত্র', 'বাংলা ২য় পত্র', 'ইংরেজি ১ম পত্র', 'ইংরেজি ২য় পত্র', 'গণিত',
+  'তথ্য ও যোগাযোগ প্রযুক্তি', 'বিজ্ঞান', 'বাংলাদেশ ও বিশ্বপরিচয়', 'ঐচ্ছিক / অন্যান্য'
+];
+
+const DEFAULT_STATE = {
+  subjects: DEFAULT_SUBJECTS,
+  islamicContent: [
+    { id: 101, category: 'Quran', title: 'সূরা আল-ফাতিহা (سورة الفاتحة)', arabic: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', meaning: 'পরম করুণাময় ও অসীম দয়ালু আল্লাহর নামে শুরু।' },
+    { id: 102, category: 'Dua', title: 'জ্ঞান বৃদ্ধির দোয়া', arabic: 'رَبِّ زِدْنِي عِلْمًا', meaning: 'হে আমার রব! আমার জ্ঞান বৃদ্ধি করে দিন।' },
+    { id: 103, category: 'Dua', title: 'দরুদ শরিফ', arabic: 'اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ', meaning: 'হে আল্লাহ, মুহাম্মদ (সা:) এর ওপর রহমত বর্ষণ করুন।' }
+  ],
+  subjectResources: [
+    { id: 201, subject: 'গণিত', type: 'video', title: 'বীজগণিতীয় রাশিমালা - লেকচার ১', url: 'https://www.youtube.com/', desc: 'বইয়ের অনুশীলনী ৩.১ এর বিস্তারিত সমাধান।' },
+    { id: 202, subject: 'ইংরেজি ১ম পত্র', type: 'pdf', title: 'English Model Question & Answer', url: 'https://drive.google.com/', desc: 'বোর্ড প্রশ্ন সমাধান ও ভোকাবুলারি।' },
+    { id: 203, subject: 'কুরআন মাজিদ', type: 'video', title: 'তাজবীদ শিক্ষা কোর্স - ক্লাস ১', url: 'https://www.youtube.com/', desc: 'সহীহ শুদ্ধভাবে কুরআন তিলাওয়াতের নিয়মাবলী।' }
+  ],
+  libraryBooks: [
+    { id: 301, title: 'দিলদার গাইড - গণিত (দাখিল)', author: 'আল-ফাতাহ পাবলিকেশনস', category: 'Guide', url: 'https://example.com', desc: 'দাখিল পরীক্ষার সম্পূর্ণ সিলেবাসভিত্তিক গাইড।' },
+    { id: 302, title: 'সহজ আরবি ব্যাকরণ', author: 'লেকচার পাবলিকেশনস', category: 'Textbook', url: 'https://example.com', desc: 'আরবি দ্বিতীয় পত্রের জন্য অত্যন্ত উপযোগী।' }
+  ],
+  publishers: [
+    { id: 401, name: 'আল-ফাতাহ পাবলিকেশনস', type: 'Guide Publisher', url: 'https://alfatah.com.bd', desc: 'দাখিল ও আলিম পরীক্ষার নির্ভরযোগ্য গাইড ও সাজেশন।' },
+    { id: 402, name: 'লেকচার পাবলিকেশনস', type: 'Textbook & Notes', url: 'https://lecturepublications.com', desc: 'মানসম্মত সহায়ক বই ও মডেল টেস্ট পাবলিশার।' },
+    { id: 403, name: 'দর্শন পাবলিকেশনস', type: 'Reference Books', url: 'https://example.com', desc: 'দাখিল ও মাদরাসা স্তরের সহায়ক কিতাব ও গাইড।' },
+    { id: 404, name: 'অ্যাট-তাদরিস অনলাইন মাদরাসা', type: 'E-Learning', url: 'https://tadrees.com', desc: 'আধুনিক ইসলামিক ও মাদরাসা অনলাইন শিক্ষা প্ল্যাটফর্ম।' }
+  ],
+  suggestions: [
+    { id: 501, title: 'দাখিল পরীক্ষার সংক্ষিপ্ত সাজেশন - কুরআন ও হাদিস', category: 'Suggestion', desc: 'অতি গুরুত্বপূর্ণ আয়াত ও হাদিসের অনুবাদ এবং ব্যাখ্যা।' },
+    { id: 502, title: 'গণিত ফাইনাল সাজেশন - উপপাদ্য ও সম্পাদ্য', category: 'Exam Note', desc: 'জ্যামিতি অংশ থেকে কমন উপযোগী গুরুত্বপূর্ণ উপপাদ্য।' }
+  ],
+  alarmRoutines: [
+    { id: 901, subject: 'কুরআন মাজিদ', duration: 30 },
+    { id: 902, subject: 'হাদিস শরিফ', duration: 30 },
+    { id: 903, subject: 'গণিত', duration: 45 },
+    { id: 904, subject: 'ইংরেজি ১ম পত্র', duration: 30 }
+  ],
+  timers: [],
+  exams: [
+    { id: 601, title: 'গণিত মডেল টেস্ট ১', subject: 'গণিত', totalQ: 10, duration: '১৫ মিনিট' }
+  ],
+  routines: [],
+  notes: [],
+  formulas: [
+    { id: 701, title: 'বর্গের সূত্রাবলি', body: '(a + b)² = a² + 2ab + b²' }
+  ],
+  notices: [
+    { id: 801, title: 'ILMORA ইকোসিস্টেমে স্বাগতম', body: 'দাখিল ২০২৭ ব্যাচের সম্পূর্ণ ডিজিটাল স্টাডি হাব ও রুটিন সক্রিয় রয়েছে।', date: todayStr(), priority: 'জরুরি' }
+  ],
+  reports: [],
+  recentPages: ['islamic', 'subjects', 'library', 'tools'],
+  profile: {
+    name: 'Salman Farshi',
+    userId: 'ILM-2027-001',
+    institution: 'আদর্শ মাদরাসা',
+    classDesig: 'Dakhil 2027',
+    email: 'salman@gmail.com',
+    phone: '01700000000',
+    photo: '',
+    createdAt: todayStr()
+  },
+  settings: {
+    theme: 'light',
+    language: 'bn',
+    goal: 6
+  }
+};
+
+function loadDB() {
+  try {
+    const raw = JSON.parse(localStorage.getItem('ilmoraEcosystemDB') || '{}');
+    return {
+      ...structuredClone(DEFAULT_STATE),
+      ...raw,
+      profile: { ...structuredClone(DEFAULT_STATE.profile), ...(raw.profile || {}) },
+      settings: { ...structuredClone(DEFAULT_STATE.settings), ...(raw.settings || {}) }
+    };
+  } catch (e) {
+    return structuredClone(DEFAULT_STATE);
+  }
+}
+
+let db = loadDB();
+let activePage = 'home';
+let calYear = new Date().getFullYear();
+let calMonth = new Date().getMonth();
+let selectedCalDate = todayStr();
+let currentSubjectDetail = '';
+
+function saveDB() {
+  try {
+    localStorage.setItem('ilmoraEcosystemDB', JSON.stringify(db));
+  } catch (e) {
+    showToast('Storage full!');
+  }
+}
+
+const lang = () => db.settings.language || 'bn';
+const t = key => (I18N[lang()] && I18N[lang()][key]) || I18N.bn[key] || key;
+
+function esc(s = '') {
+  return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+function showToast(msg) {
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 2600);
+}
+
+function applyTranslations() {
+  document.documentElement.lang = lang();
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.textContent = t(el.dataset.i18n);
+  });
+  $('langBtn').textContent = lang() === 'bn' ? 'EN' : 'বাংলা';
+  const activeNavBtn = document.querySelector(`#nav button[data-page="${activePage}"]`);
+  if (activeNavBtn) $('pageTitle').textContent = activeNavBtn.textContent.trim();
+}
+
+function goPage(page) {
+  activePage = page;
+  document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('active', b.dataset.page === page));
+  document.querySelectorAll('#bottomNav button').forEach(b => b.classList.toggle('active', b.dataset.page === page));
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = $('page-' + page);
+  if (target) target.classList.add('active');
+
+  const navBtn = document.querySelector(`#nav button[data-page="${page}"]`);
+  if (navBtn) $('pageTitle').textContent = navBtn.textContent.trim();
+
+  if (page !== 'home') {
+    db.recentPages = [page, ...db.recentPages.filter(p => p !== page)].slice(0, 4);
+    saveDB();
+  }
+  closeSidebar();
+  renderAll();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function closeSidebar() {
+  $('sidebar').classList.remove('open');
+  $('sidebarBackdrop').classList.remove('open');
+}
+
+/* ==========================================================================
+   CLOCK & CALENDAR
+   ========================================================================== */
+function updateClock() {
+  const now = new Date();
+  let h = now.getHours();
+  const m = String(now.getMinutes()).padStart(2, '0');
+  const s = String(now.getSeconds()).padStart(2, '0');
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12 || 12;
+  $('clockTime').textContent = `${String(h).padStart(2, '0')}:${m}:${s}`;
+  $('clockAmPm').textContent = ampm;
+  $('clockFullDate').textContent = now.toLocaleDateString(lang() === 'bn' ? 'bn-BD' : 'en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  $('todayText').textContent = now.toLocaleDateString(lang() === 'bn' ? 'bn-BD' : 'en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+function renderCalendar() {
+  const monthDate = new Date(calYear, calMonth, 1);
+  $('calMonthTitle').textContent = monthDate.toLocaleDateString(lang() === 'bn' ? 'bn-BD' : 'en-US', { month: 'long', year: 'numeric' });
+  const dows = lang() === 'bn' ? ['রবি', 'সোম', 'মঙ্গল', 'বুধ', 'বৃহঃ', 'শুক্র', 'শনি'] : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const firstDay = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+  const today = todayStr();
+
+  let html = dows.map(d => `<div class="cal-dow">${d}</div>`).join('');
+  for (let i = 0; i < firstDay; i++) html += `<div class="cal-day empty"></div>`;
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const iso = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    const isToday = iso === today ? 'today' : '';
+    const isSel = iso === selectedCalDate ? 'selected' : '';
+    html += `<button type="button" class="cal-day ${isToday} ${isSel}" onclick="selectedCalDate='${iso}';renderCalendar()">${d}</button>`;
+  }
+  $('calGrid').innerHTML = html;
+  $('calSelectedLabel').textContent = selectedCalDate;
+  $('calSelectedDetails').innerHTML = `<span class="muted">নির্বাচিত দিনের রিমাইন্ডার ও ইভেন্ট</span>`;
+}
+
+/* ==========================================================================
+   RENDER DYNAMIC HOMEPAGE & MODULES
+   ========================================================================== */
+function populateSubjectSelects() {
+  const html = db.subjects.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join('');
+  ['noteSubject', 'timerSubjectSelect', 'modExamSub'].forEach(id => {
+    if ($(id)) $(id).innerHTML = html;
+  });
+}
+
+function renderHomeSubjects() {
+  const icons = ['📖', '📜', '⚖️', '📘', '📙', '📗', '📕', '📐', '📐', '🔢', '💻', '🧪', '🌍', '📚'];
+  $('homeSubjectsGrid').innerHTML = db.subjects.map((sub, i) => `
+    <button class="feature-card" onclick="openSubjectDetail('${esc(sub)}')">
+      <div class="feature-ico">${icons[i % icons.length]}</div>
+      <div><b>${esc(sub)}</b><span>ক্লাস, নোট ও রিসোর্স</span></div>
+    </button>
+  `).join('');
+
+  $('subjectsDashboardGrid').innerHTML = db.subjects.map((sub, i) => `
+    <button class="feature-card" onclick="openSubjectDetail('${esc(sub)}')">
+      <div class="feature-ico">${icons[i % icons.length]}</div>
+      <div><b>${esc(sub)}</b><span>ড্যাশবোর্ড খুলুন</span></div>
+    </button>
+  `).join('');
+}
+
+function openSubjectDetail(subName) {
+  currentSubjectDetail = subName;
+  $('subjectDetailTitle').textContent = `বিষয়: ${subName}`;
+  
+  const vids = db.subjectResources.filter(x => x.subject === subName && x.type === 'video');
+  $('subjectDetailVideos').innerHTML = vids.length ? vids.map(v => `
+    <div class="item">
+      <b>${esc(v.title)}</b>
+      <p>${esc(v.desc)}</p>
+      <button class="sm" onclick="window.open('${esc(v.url)}', '_blank')">ভিডিও দেখুন</button>
+    </div>
+  `).join('') : `<div class="empty">কোনো ভিডিও ক্লাস নেই।</div>`;
+
+  const pdfs = db.subjectResources.filter(x => x.subject === subName && x.type === 'pdf');
+  $('subjectDetailPdfs').innerHTML = pdfs.length ? pdfs.map(p => `
+    <div class="item">
+      <b>${esc(p.title)}</b>
+      <p>${esc(p.desc)}</p>
+      <button class="sm" onclick="window.open('${esc(p.url)}', '_blank')">PDF পড়ুন</button>
+    </div>
+  `).join('') : `<div class="empty">কোনো PDF নোট নেই।</div>`;
+
+  const suggs = db.suggestions.filter(s => s.title.includes(subName) || s.desc.includes(subName));
+  $('subjectDetailSuggestions').innerHTML = suggs.length ? suggs.map(s => `
+    <div class="item">
+      <b>${esc(s.title)}</b>
+      <p>${esc(s.desc)}</p>
+    </div>
+  `).join('') : `<div class="empty">এই বিষয়ের জন্য বিশেষ সাজেশন নেই।</div>`;
+
+  const exms = db.exams.filter(e => e.subject === subName);
+  $('subjectDetailExams').innerHTML = exms.length ? exms.map(e => `
+    <div class="item">
+      <b>${esc(e.title)}</b>
+      <small class="muted">প্রশ্ন: ${e.totalQ} টি • সময়: ${esc(e.duration)}</small>
+      <button class="sm" style="margin-top:6px" onclick="showToast('পরীক্ষা শুরু হচ্ছে...')">অংশ নিন</button>
+    </div>
+  `).join('') : `<div class="empty">কোনো পরীক্ষা নেই।</div>`;
+
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  $('page-subject-detail').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function openSubjectResourceModalFromDetail() {
+  openSubjectResourceModal('video', currentSubjectDetail);
+}
+
+function openPublisherDetail(pubName) {
+  const books = db.libraryBooks.filter(b => b.author.includes(pubName) || b.desc.includes(pubName));
+  openModal(pubName, `
+    <p><b>প্রকাশনা / প্রতিষ্ঠান:</b> ${esc(pubName)}</p>
+    <div style="margin-top:10px">
+      ${books.length ? books.map(b => `<div class="item"><b>${esc(b.title)}</b><p>${esc(b.desc)}</p><button class="sm" onclick="window.open('${esc(b.url)}', '_blank')">বই দেখুন</button></div>`).join('') : '<p class="muted">এই প্রকাশনার কোনো বই লাইব্রেরিতে যুক্ত করা হয়নি।</p>'}
+    </div>
+  `, () => {});
+}
+
+function openIslamicCategory(cat) {
+  goPage('islamic');
+}
+
+function renderHomeNotices() {
+  $('homeNotices').innerHTML = db.notices.length ? db.notices.map(n => `
+    <div class="urgent-item">
+      <div class="urgent-item-head"><b>${esc(n.title)}</b><small>${esc(n.date)}</small></div>
+      <p>${esc(n.body)}</p>
+    </div>
+  `).join('') : `<div class="urgent-item"><p>কোনো নতুন নোটিশ নেই।</p></div>`;
+}
+
+function renderIslamic() {
+  $('islamicQuranList').innerHTML = db.islamicContent.filter(x => x.category === 'Quran').map(q => `
+    <div class="item">
+      <b>${esc(q.title)}</b>
+      <div style="font-family:'Amiri';font-size:20px;color:var(--teal);margin:6px 0">${esc(q.arabic)}</div>
+      <p>${esc(q.meaning)}</p>
+      <button class="danger sm" onclick="deleteItem('islamicContent', ${q.id})">মুছুন</button>
+    </div>
+  `).join('') || `<div class="empty">কোনো ডেটা নেই।</div>`;
+
+  $('islamicDuaList').innerHTML = db.islamicContent.filter(x => x.category === 'Dua').map(d => `
+    <div class="item">
+      <b>${esc(d.title)}</b>
+      <div style="font-family:'Amiri';font-size:20px;color:var(--teal);margin:6px 0">${esc(d.arabic)}</div>
+      <p>${esc(d.meaning)}</p>
+      <button class="danger sm" onclick="deleteItem('islamicContent', ${d.id})">মুছুন</button>
+    </div>
+  `).join('') || `<div class="empty">কোনো ডেটা নেই।</div>`;
+}
+
+function renderSubjectsManager() {
+  $('subjectEditor').innerHTML = db.subjects.map((s, i) => `
+    <div class="subjectrow">
+      <input data-sub-idx="${i}" value="${esc(s)}">
+      <span class="muted">বিষয় ${i + 1}</span>
+    </div>
+  `).join('');
+  renderHomeSubjects();
+}
+
+function renderLibrary() {
+  $('libraryBookGrid').innerHTML = db.libraryBooks.map(b => `
+    <div class="card" style="margin:0;display:flex;flex-direction:column;justify-content:between;">
+      <div>
+        <span class="pill teal">${esc(b.category)}</span>
+        <b style="font-size:15px;margin-top:6px;display:block">${esc(b.title)}</b>
+        <small class="muted">${esc(b.author)}</small>
+        <p style="font-size:13px;margin:8px 0">${esc(b.desc)}</p>
+      </div>
+      <div class="actions">
+        <button class="sm" onclick="window.open('${esc(b.url)}', '_blank')">বই পড়ুন</button>
+        <button class="danger sm" onclick="deleteItem('libraryBooks', ${b.id})">মুছুন</button>
+      </div>
+    </div>
+  `).join('') || `<div class="empty">কোনো বই নেই।</div>`;
+}
+
+function renderPublishers() {
+  $('publishersGrid').innerHTML = db.publishers.map(p => `
+    <div class="card" style="margin:0;display:flex;flex-direction:column;justify-content:between;">
+      <div>
+        <span class="pill gold">${esc(p.type)}</span>
+        <b style="font-size:15px;margin-top:6px;display:block">${esc(p.name)}</b>
+        <p style="font-size:13px;margin:8px 0">${esc(p.desc)}</p>
+      </div>
+      <div class="actions">
+        <button class="sm" onclick="window.open('${esc(p.url)}', '_blank')">ভিজিট করুন</button>
+        <button class="danger sm" onclick="deleteItem('publishers', ${p.id})">মুছুন</button>
+      </div>
+    </div>
+  `).join('') || `<div class="empty">কোনো প্রকাশনা নেই।</div>`;
+}
+
+function renderSuggestions() {
+  $('suggestionsList').innerHTML = db.suggestions.map(s => `
+    <div class="item">
+      <b>${esc(s.title)} <span class="pill teal">${esc(s.category)}</span></b>
+      <p>${esc(s.desc)}</p>
+      <button class="danger sm" onclick="deleteItem('suggestions', ${s.id})">মুছুন</button>
+    </div>
+  `).join('') || `<div class="empty">কোনো সাজেশন নেই।</div>`;
+}
+
+function renderExams() {
+  $('examListGrid').innerHTML = db.exams.map(e => `
+    <div class="card" style="margin:0">
+      <b style="font-size:15px">${esc(e.title)}</b>
+      <small class="muted">বিষয়: ${esc(e.subject)} • প্রশ্ন: ${e.totalQ} টি • সময়: ${esc(e.duration)}</small>
+      <div class="actions" style="margin-top:10px">
+        <button class="sm" onclick="showToast('পরীক্ষা শুরু হচ্ছে...')">পরীক্ষায় অংশ নিন</button>
+        <button class="danger sm" onclick="deleteItem('exams', ${e.id})">মুছুন</button>
+      </div>
+    </div>
+  `).join('') || `<div class="empty">কোনো পরীক্ষা নেই।</div>`;
+}
+
+function renderNotes() {
+  $('noteList').innerHTML = db.notes.map(n => `
+    <div class="item">
+      <b>${esc(n.title)} <span class="pill">${esc(n.subject)}</span></b>
+      <p style="white-space:pre-wrap">${esc(n.body)}</p>
+      ${n.image ? `<img class="thumb" src="${n.image}">` : ''}
+      <button class="danger sm" onclick="deleteItem('notes', ${n.id})">মুছুন</button>
+    </div>
+  `).join('') || `<div class="empty">কোনো নোট নেই।</div>`;
+}
+
+function renderFormulas() {
+  $('formulaList').innerHTML = db.formulas.map(f => `
+    <div class="item">
+      <b>${esc(f.title)}</b>
+      <p style="font-family:monospace">${esc(f.body)}</p>
+      <button class="danger sm" onclick="deleteItem('formulas', ${f.id})">মুছুন</button>
+    </div>
+  `).join('') || `<div class="empty">কোনো সূত্র নেই।</div>`;
+}
+
+function renderAlarmRoutine() {
+  const list = $('alarmRoutineList');
+  if (!list) return;
+  list.innerHTML = `
+    <h4 style="margin:0 0 6px">সুপারিশকৃত স্টাডি অ্যালার্ম রুটিন</h4>
+    ${db.alarmRoutines.map(r => `
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid var(--line);">
+        <span><b>${esc(r.subject)}</b> — ${r.duration} মিনিট</span>
+        <button class="sm" onclick="startAlarmForSubject('${esc(r.subject)}', ${r.duration})">টাইমার সেট</button>
+      </div>
+    `).join('')}
+  `;
+}
+
+function startAlarmForSubject(sub, mins) {
+  $('timerSubjectSelect').value = sub;
+  $('timerMins').value = mins;
+  timeLeft = mins * 60;
+  updateTimerDisplay();
+  showToast(`${sub} এর জন্য ${mins} মিনিটের টাইমার সেট হয়েছে।`);
+}
+
+function renderProfileAndSettings() {
+  const p = db.profile;
+  $('profileName').value = p.name || '';
+  $('profileUserId').value = p.userId || 'ILM-2027-001';
+  $('profileInstitution').value = p.institution || '';
+  $('profileClass').value = p.classDesig || '';
+  $('profileEmail').value = p.email || '';
+  $('profilePhone').value = p.phone || '';
+
+  $('profileDisplayName').textContent = p.name || 'Salman Farshi';
+  $('profileDisplayMeta').textContent = `ID: ${p.userId || 'ILM-2027-001'} • ${p.classDesig || 'Dakhil 2027'}`;
+  $('topUserName').textContent = (p.name || 'Salman').split(' ')[0];
+  $('welcome').textContent = `আসসালামু আলাইকুম, ${p.name || 'সালমান'}!`;
+
+  const fields = [p.name, p.userId, p.institution, p.classDesig, p.email, p.phone];
+  const filled = fields.filter(Boolean).length;
+  const pct = Math.round((filled / fields.length) * 100);
+  $('profileCompletionBadge').textContent = `${pct}% Complete`;
+
+  if (p.photo) {
+    $('profileAvatarBox').innerHTML = `<img src="${p.photo}" style="width:100%;height:100%;border-radius:50%;object-fit:cover">`;
+    $('topAvatar').outerHTML = `<img id="topAvatar" src="${p.photo}" alt="Avatar">`;
+  } else {
+    $('profileAvatarBox').textContent = (p.name || 'S').charAt(0);
+    $('topAvatar').outerHTML = `<span class="avatar-fallback" id="topAvatar">S</span>`;
+  }
+
+  $('languageSelect').value = db.settings.language;
+  $('themeSelect').value = db.settings.theme;
+}
+
+function applyTheme() {
+  document.documentElement.dataset.theme = db.settings.theme;
+  $('themeBtn').textContent = db.settings.theme === 'dark' ? '☀️' : '🌙';
+}
+
+function renderAll() {
+  populateSubjectSelects();
+  applyTranslations();
+  applyTheme();
+  renderProfileAndSettings();
+  renderHomeSubjects();
+  renderHomeNotices();
+  renderCalendar();
+  renderIslamic();
+  renderSubjectsManager();
+  renderLibrary();
+  renderPublishers();
+  renderSuggestions();
+  renderExams();
+  renderNotes();
+  renderFormulas();
+  renderAlarmRoutine();
+}
+
+function deleteItem(key, id) {
+  if (!confirm('আপনি কি নিশ্চিতভাবে এটি মুছে ফেলতে চান?')) return;
+  db[key] = db[key].filter(x => x.id !== id);
+  saveDB();
+  renderAll();
+  showToast('সফলভাবে মুছে ফেলা হয়েছে।');
+}
+
+/* ==========================================================================
+   MODALS & UNIVERSAL DIALOGS
+   ========================================================================== */
+function openModal(title, htmlContent, onSave) {
+  $('modalTitle').textContent = title;
+  $('modalBodyContent').innerHTML = htmlContent;
+  $('modalBackdrop').classList.remove('hidden');
+  $('modalOkBtn').onclick = () => {
+    if (onSave()) {
+      $('modalBackdrop').classList.add('hidden');
+      renderAll();
+      showToast('সফলভাবে সংরক্ষিত হয়েছে!');
+    }
+  };
+  $('modalCancelBtn').onclick = () => $('modalBackdrop').classList.add('hidden');
+}
+
+function openIslamicAddModal(cat) {
+  openModal(cat === 'Quran' ? 'পবিত্র কুরআন বা সূরা যোগ করুন' : 'মাসনুন দোয়া বা হাদিস যোগ করুন', `
+    <label>শিরোনাম</label><input id="modTitle" placeholder="শিরোনাম">
+    <label>আরবি পাঠ</label><textarea id="modArabic" placeholder="عربي"></textarea>
+    <label>অর্থ / ব্যাখ্যা</label><textarea id="modMeaning" placeholder="বাংলা অর্থ"></textarea>
+  `, () => {
+    const title = $('modTitle').value.trim();
+    const arabic = $('modArabic').value.trim();
+    const meaning = $('modMeaning').value.trim();
+    if (!title) return false;
+    db.islamicContent.unshift({ id: Date.now(), category: cat, title, arabic, meaning });
+    saveDB();
+    return true;
+  });
+}
+
+function openSubjectResourceModal(type, preSub = '') {
+  openModal('নতুন বিষয়ভিত্তিক রিসোর্স যোগ করুন', `
+    <label>বিষয়</label><select id="modResSub">${db.subjects.map(s => `<option ${s === preSub ? 'selected' : ''}>${s}</option>`).join('')}</select>
+    <label>রিসোর্সের শিরোনাম</label><input id="modResTitle" placeholder="শিরোনাম">
+    <label>লিংক (URL)</label><input id="modResUrl" type="url" placeholder="https://...">
+    <label>বিবরণ</label><textarea id="modResDesc" placeholder="বিবরণ"></textarea>
+  `, () => {
+    const subject = $('modResSub').value;
+    const title = $('modResTitle').value.trim();
+    const url = $('modResUrl').value.trim();
+    const desc = $('modResDesc').value.trim();
+    if (!title || !url) return false;
+    db.subjectResources.unshift({ id: Date.now(), subject, type, title, url, desc });
+    saveDB();
+    if (currentSubjectDetail) openSubjectDetail(currentSubjectDetail);
+    return true;
+  });
+}
+
+function openSubjectAddModal() {
+  openModal('নতুন বিষয় যোগ করুন', `
+    <label>বিষয়ের নাম</label><input id="modNewSub" placeholder="যেমন: কৃষি শিক্ষা">
+  `, () => {
+    const name = $('modNewSub').value.trim();
+    if (!name) return false;
+    db.subjects.push(name);
+    saveDB();
+    renderAll();
+    return true;
+  });
+}
+
+function openLibraryModal() {
+  openModal('ডিজিটাল লাইব্রেরিতে বই যোগ করুন', `
+    <label>বইয়ের নাম</label><input id="modBookTitle" placeholder="বইয়ের নাম">
+    <label>লেখক / প্রকাশনা</label><input id="modBookAuthor" placeholder="লেখক">
+    <label>ক্যাটেগরি</label><select id="modBookCat"><option>Guide</option><option>Textbook</option><option>Reference</option><option>Islamic</option></select>
+    <label>লিংক (PDF / Drive)</label><input id="modBookUrl" type="url" placeholder="https://...">
+    <label>বিবরণ</label><textarea id="modBookDesc" placeholder="বই সম্পর্কে"></textarea>
+  `, () => {
+    const title = $('modBookTitle').value.trim();
+    const author = $('modBookAuthor').value.trim();
+    const category = $('modBookCat').value;
+    const url = $('modBookUrl').value.trim();
+    const desc = $('modBookDesc').value.trim();
+    if (!title || !url) return false;
+    db.libraryBooks.unshift({ id: Date.now(), title, author, category, url, desc });
+    saveDB();
+    return true;
+  });
+}
+
+function openPublisherModal() {
+  openModal('প্রকাশনা বা গাইড সেন্টার যোগ করুন', `
+    <label>প্রকাশনার নাম</label><input id="modPubName" placeholder="নাম">
+    <label>ধরন</label><input id="modPubType" placeholder="যেমন: Guide Publisher">
+    <label>অফিসিয়াল ওয়েবসাইট</label><input id="modPubUrl" type="url" placeholder="https://...">
+    <label>বিবরণ</label><textarea id="modPubDesc" placeholder="বিবরণ"></textarea>
+  `, () => {
+    const name = $('modPubName').value.trim();
+    const type = $('modPubType').value.trim();
+    const url = $('modPubUrl').value.trim();
+    const desc = $('modPubDesc').value.trim();
+    if (!name || !url) return false;
+    db.publishers.unshift({ id: Date.now(), name, type, url, desc });
+    saveDB();
+    return true;
+  });
+}
+
+function openSuggestionModal() {
+  openModal('গুরুত্বপূর্ণ সাজেশন যোগ করুন', `
+    <label>সাজেশনের শিরোনাম</label><input id="modSuggTitle" placeholder="শিরোনাম">
+    <label>ক্যাটেগরি</label><input id="modSuggCat" placeholder="যেমন: Suggestion / Q-Bank">
+    <label>বিবরণ / নোট</label><textarea id="modSuggDesc" placeholder="বিস্তারিত"></textarea>
+  `, () => {
+    const title = $('modSuggTitle').value.trim();
+    const category = $('modSuggCat').value.trim() || 'Suggestion';
+    const desc = $('modSuggDesc').value.trim();
+    if (!title) return false;
+    db.suggestions.unshift({ id: Date.now(), title, category, desc });
+    saveDB();
+    return true;
+  });
+}
+
+function openExamModal() {
+  openModal('অনলাইন পরীক্ষা বা মডেল টেস্ট তৈরি করুন', `
+    <label>পরীক্ষার নাম</label><input id="modExamTitle" placeholder="মডেল টেস্ট ১">
+    <label>বিষয়</label><select id="modExamSubModal">${db.subjects.map(s => `<option>${s}</option>`).join('')}</select>
+    <label>মোট প্রশ্ন সংখ্যা</label><input id="modExamQ" type="number" value="10">
+    <label>সময়কাল</label><input id="modExamTime" value="১৫ মিনিট">
+  `, () => {
+    const title = $('modExamTitle').value.trim();
+    const subject = $('modExamSubModal').value;
+    const totalQ = Number($('modExamQ').value) || 10;
+    const duration = $('modExamTime').value.trim() || '১৫ মিনিট';
+    if (!title) return false;
+    db.exams.unshift({ id: Date.now(), title, subject, totalQ, duration });
+    saveDB();
+    return true;
+  });
+}
+
+function openAlarmSettingsModal() {
+  openModal('স্টাডি অ্যালার্ম সেশন রুটিন যোগ করুন', `
+    <label>বিষয়</label><select id="modAlarmSub">${db.subjects.map(s => `<option>${s}</option>`).join('')}</select>
+    <label>সময়কাল (মিনিট)</label><input id="modAlarmDur" type="number" value="30">
+  `, () => {
+    const subject = $('modAlarmSub').value;
+    const duration = Number($('modAlarmDur').value) || 30;
+    db.alarmRoutines.push({ id: Date.now(), subject, duration });
+    saveDB();
+    renderAlarmRoutine();
+    return true;
+  });
+}
+
+/* ==========================================================================
+   TIMER & ALARM ENGINE
+   ========================================================================== */
+let timerInterval = null;
+let timeLeft = 1800;
+let timerRunning = false;
+
+function updateTimerDisplay() {
+  const m = Math.floor(timeLeft / 60);
+  const s = timeLeft % 60;
+  $('timerDisplay').textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+}
+
+function initTimer() {
+  $('startTimerBtn').onclick = () => {
+    if (timerRunning) return;
+    const mins = Number($('timerMins').value) || 30;
+    if (!timerRunning && timeLeft === 1800) timeLeft = mins * 60;
+    timerRunning = true;
+    timerInterval = setInterval(() => {
+      if (timeLeft > 0) {
+        timeLeft--;
+        updateTimerDisplay();
+      } else {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        try {
+          const audio = new Audio('https://actions.google.com/sounds/v1/alarms/digital_watch_alarm_long.ogg');
+          audio.play().catch(e => {});
+        } catch (err) {}
+        alert('স্টাডি সেশন সম্পন্ন হয়েছে!');
+      }
+    }, 1000);
+  };
+  $('pauseTimerBtn').onclick = () => {
+    clearInterval(timerInterval);
+    timerRunning = false;
+  };
+  $('resetTimerBtn').onclick = () => {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    timeLeft = (Number($('timerMins').value) || 30) * 60;
+    updateTimerDisplay();
+  };
+  updateTimerDisplay();
+}
+
+/* ==========================================================================
+   SCIENTIFIC CALCULATOR
+   ========================================================================== */
+let calcExpression = '';
+let calcLastAns = '0';
+let calcDegMode = true;
+
+function updateCalcScreen(outText) {
+  $('calcExpr').textContent = calcExpression || '0';
+  if (outText !== undefined) $('calcOut').textContent = outText;
+}
+
+function evaluateScientific(rawExpr) {
+  if (!rawExpr || !rawExpr.trim()) return 0;
+  let expr = rawExpr
+    .replace(/×/g, '*')
+    .replace(/÷/g, '/')
+    .replace(/−/g, '-')
+    .replace(/π/g, `(${Math.PI})`)
+    .replace(/\be\b/g, `(${Math.E})`)
+    .replace(/ANS/g, `(${calcLastAns})`)
+    .replace(/√\(/g, 'Math.sqrt(')
+    .replace(/log\(/g, 'Math.log10(')
+    .replace(/ln\(/g, 'Math.log(')
+    .replace(/\^/g, '**')
+    .replace(/(\d+(?:\.\d+)?)%/g, '($1/100)');
+
+  const toRad = x => (calcDegMode ? (x * Math.PI) / 180 : x);
+  const sinFn = x => Math.sin(toRad(x));
+  const cosFn = x => Math.cos(toRad(x));
+  const tanFn = x => Math.tan(toRad(x));
+
+  expr = expr.replace(/\bsin\(/g, 'sinFn(').replace(/\bcos\(/g, 'cosFn(').replace(/\btan\(/g, 'tanFn(');
+  const openCount = (expr.match(/\(/g) || []).length;
+  const closeCount = (expr.match(/\)/g) || []).length;
+  if (openCount > closeCount) expr += ')'.repeat(openCount - closeCount);
+
+  const result = Function('sinFn', 'cosFn', 'tanFn', `"use strict"; return (${expr});`)(sinFn, cosFn, tanFn);
+  if (typeof result !== 'number' || !Number.isFinite(result)) throw new Error('Math Error');
+  return Math.round(result * 1e10) / 1e10;
+}
+
+function initCalculator() {
+  $('calcModeBtn').onclick = () => {
+    calcDegMode = !calcDegMode;
+    $('calcModeBtn').textContent = calcDegMode ? 'DEG' : 'RAD';
+    $('calcAngleLabel').textContent = `ANGLE: ${calcDegMode ? 'DEG' : 'RAD'}`;
+  };
+  $('calcPad').onclick = e => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    const act = btn.dataset.act;
+    const val = btn.dataset.val;
+    if (act === 'ac') { calcExpression = ''; updateCalcScreen('0'); }
+    else if (act === 'del') { calcExpression = calcExpression.slice(0, -1); updateCalcScreen(); }
+    else if (act === 'ans') { calcExpression += 'ANS'; updateCalcScreen(); }
+    else if (act === 'eq') {
+      try {
+        const res = evaluateScientific(calcExpression);
+        calcLastAns = String(res);
+        updateCalcScreen(calcLastAns);
+      } catch (err) { updateCalcScreen('Syntax Error'); }
+    } else if (val) { calcExpression += val; updateCalcScreen(); }
+  };
+}
+
+/* ==========================================================================
+   REPORTS & STATEMENT GENERATOR
+   ========================================================================== */
+function generateStatement() {
+  const from = $('fromDate').value || todayStr();
+  const to = $('toDate').value || todayStr();
+  const p = db.profile;
+  $('statementResult').innerHTML = `
+    <div class="report-sheet">
+      <div class="report-header">
+        <div>
+          <b style="font-size:18px;display:block">ILMORA — Smart Education Ecosystem</b>
+          <small class="muted">Academic Performance Statement (${esc(from)} to ${esc(to)})</small>
+        </div>
+        <div style="text-align:right;font-size:12px"><b>Generated:</b> ${new Date().toLocaleString()}</div>
+      </div>
+      <div class="report-user-box">
+        <div><b>Name:</b> ${esc(p.name)}</div>
+        <div><b>User ID:</b> ${esc(p.userId)}</div>
+        <div><b>Institution:</b> ${esc(p.institution)}</div>
+        <div><b>Class:</b> ${esc(p.classDesig)}</div>
+      </div>
+      <p>সকল ক্যাটেগরি এবং স্টাডি সেশন সফলভাবে সংকলিত হয়েছে।</p>
+    </div>
+  `;
+}
+
+/* ==========================================================================
+   EVENT LISTENERS & INITIALIZATION
+   ========================================================================== */
+function initEvents() {
+  document.querySelectorAll('#nav button, #bottomNav button').forEach(btn => {
+    btn.addEventListener('click', () => goPage(btn.dataset.page));
+  });
+  $('hamb').addEventListener('click', () => {
+    $('sidebar').classList.add('open');
+    $('sidebarBackdrop').classList.add('open');
+  });
+  $('sidebarBackdrop').addEventListener('click', closeSidebar);
+  $('topProfileBtn').addEventListener('click', () => goPage('settings'));
+
+  $('themeBtn').addEventListener('click', () => {
+    db.settings.theme = db.settings.theme === 'dark' ? 'light' : 'dark';
+    saveDB();
+    applyTheme();
+  });
+  $('langBtn').addEventListener('click', () => {
+    db.settings.language = lang() === 'bn' ? 'en' : 'bn';
+    saveDB();
+    renderAll();
+  });
+
+  $('saveSubjects').onclick = () => {
+    db.subjects = [...document.querySelectorAll('[data-sub-idx]')].map(el => el.value.trim() || 'অন্যান্য');
+    saveDB();
+    renderAll();
+    showToast('বিষয়সমূহ সফলভাবে সংরক্ষিত হয়েছে!');
+  };
+
+  let pendingNoteImg = '';
+  $('noteImage').onchange = e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      pendingNoteImg = reader.result;
+      $('imagePreview').innerHTML = `<img class="thumb" src="${pendingNoteImg}">`;
+    };
+    reader.readAsDataURL(file);
+  };
+
+  $('saveNoteBtn').onclick = () => {
+    const title = $('noteTitle').value.trim();
+    if (!title) return showToast('নোটের শিরোনাম লিখুন');
+    db.notes.unshift({ id: Date.now(), title, subject: $('noteSubject').value, body: $('noteBody').value.trim(), image: pendingNoteImg });
+    $('noteTitle').value = ''; $('noteBody').value = ''; pendingNoteImg = ''; $('imagePreview').innerHTML = '';
+    saveDB();
+    renderAll();
+    showToast('নোট সংরক্ষিত হয়েছে!');
+  };
+
+  $('saveFormulaBtn').onclick = () => {
+    const title = $('formulaTitle').value.trim();
+    const body = $('formulaBody').value.trim();
+    if (!title || !body) return showToast('ফর্মুলা নাম ও বিবরণ দিন');
+    db.formulas.unshift({ id: Date.now(), title, body });
+    $('formulaTitle').value = ''; $('formulaBody').value = '';
+    saveDB();
+    renderAll();
+    showToast('সূত্র সংরক্ষিত হয়েছে!');
+  };
+
+  $('publishNoticeBtn').onclick = () => {
+    const title = $('noticeTitleInput').value.trim();
+    const body = $('noticeBodyInput').value.trim();
+    if (!title || !body) return showToast('নোটিশের শিরোনাম ও বিবরণ দিন');
+    db.notices.unshift({ id: Date.now(), title, body, date: todayStr(), priority: 'জরুরি' });
+    $('noticeTitleInput').value = ''; $('noticeBodyInput').value = '';
+    saveDB();
+    renderAll();
+    showToast('নোটিশ হোমপেজে প্রকাশিত হয়েছে!');
+  };
+
+  $('saveProfileBtn').onclick = () => {
+    db.profile.name = $('profileName').value.trim();
+    db.profile.userId = $('profileUserId').value.trim();
+    db.profile.institution = $('profileInstitution').value.trim();
+    db.profile.classDesig = $('profileClass').value.trim();
+    db.profile.email = $('profileEmail').value.trim();
+    db.profile.phone = $('profilePhone').value.trim();
+    saveDB();
+    renderAll();
+    showToast('প্রোফাইল সংরক্ষিত হয়েছে!');
+  };
+
+  $('makeStatement').onclick = generateStatement;
+  $('printStatement').onclick = () => { generateStatement(); window.print(); };
+
+  $('exportJsonBtn').onclick = () => {
+    const blob = new Blob([JSON.stringify(db, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = `ILMORA-Backup-${todayStr()}.json`; a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+
+  $('importJsonInput').onchange = e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        db = JSON.parse(reader.result);
+        saveDB();
+        renderAll();
+        showToast('ব্যাকআপ সফলভাবে রিস্টোর হয়েছে!');
+      } catch (err) { showToast('ত্রুটিপূর্ণ JSON ফাইল!'); }
+    };
+    reader.readAsText(file);
+  };
+
+  $('resetDataBtn').onclick = () => {
+    if (!confirm('সব ডেটা রিসেট হবে। আপনি কি নিশ্চিত?')) return;
+    localStorage.removeItem('ilmoraEcosystemDB');
+    db = structuredClone(DEFAULT_STATE);
+    saveDB();
+    renderAll();
+    showToast('সব ডেটা রিসেট করা হয়েছে।');
+  };
+
+  initTimer();
+  initCalculator();
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  ['fromDate', 'toDate'].forEach(id => { if ($(id)) $(id).value = todayStr(); });
+  initEvents();
+  renderAll();
+  updateClock();
+  setInterval(updateClock, 1000);
+});
+</script>
+</body>
+</html>
